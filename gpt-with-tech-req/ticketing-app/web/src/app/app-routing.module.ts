@@ -23,68 +23,68 @@ export const routes: Routes = [
   },
 
   // Events (public listing + details)
-  {
-    path: 'events',
-    loadChildren: () =>
-      import('./features/events/events.module').then((m) => m.EventsModule),
-    data: { title: 'Events' },
-  },
+  // {
+  //   path: 'events',
+  //   loadChildren: () =>
+  //     import('./features/events/events.module').then((m) => m.EventsModule),
+  //   data: { title: 'Events' },
+  // },
 
   // Checkout (requires login to complete purchase)
-  {
-    path: 'checkout',
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
-    loadChildren: () =>
-      import('./features/checkout/checkout.module').then(
-        (m) => m.CheckoutModule,
-      ),
-    data: { title: 'Checkout' },
-  },
+  // {
+  //   path: 'checkout',
+  //   canActivate: [AuthGuard],
+  //   canLoad: [AuthGuard],
+  //   loadChildren: () =>
+  //     import('./features/checkout/checkout.module').then(
+  //       (m) => m.CheckoutModule,
+  //     ),
+  //   data: { title: 'Checkout' },
+  // },
 
   // Profile (requires USER+)
-  {
-    path: 'profile',
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
-    loadChildren: () =>
-      import('./features/profile/profile.module').then(
-        (m) => m.ProfileModule,
-      ),
-    data: { title: 'My Profile', roles: ['USER', 'SELLER', 'CHECKER', 'ADMIN'] as Role[] },
-  },
+  // {
+  //   path: 'profile',
+  //   canActivate: [AuthGuard],
+  //   canLoad: [AuthGuard],
+  //   loadChildren: () =>
+  //     import('./features/profile/profile.module').then(
+  //       (m) => m.ProfileModule,
+  //     ),
+  //   data: { title: 'My Profile', roles: ['USER', 'SELLER', 'CHECKER', 'ADMIN'] as Role[] },
+  // },
 
   // Seller (SELLER or ADMIN)
-  {
-    path: 'seller',
-    canActivate: [AuthGuard, RoleGuard],
-    canLoad: [AuthGuard, RoleGuard],
-    loadChildren: () =>
-      import('./features/seller/seller.module').then((m) => m.SellerModule),
-    data: { title: 'Seller', roles: ['SELLER', 'ADMIN'] as Role[] },
-  },
+  // {
+  //   path: 'seller',
+  //   canActivate: [AuthGuard, RoleGuard],
+  //   canLoad: [AuthGuard, RoleGuard],
+  //   loadChildren: () =>
+  //     import('./features/seller/seller.module').then((m) => m.SellerModule),
+  //   data: { title: 'Seller', roles: ['SELLER', 'ADMIN'] as Role[] },
+  // },
 
   // Checker (CHECKER or ADMIN)
-  {
-    path: 'checker',
-    canActivate: [AuthGuard, RoleGuard],
-    canLoad: [AuthGuard, RoleGuard],
-    loadChildren: () =>
-      import('./features/checker/checker.module').then(
-        (m) => m.CheckerModule,
-      ),
-    data: { title: 'Checker', roles: ['CHECKER', 'ADMIN'] as Role[] },
-  },
+  // {
+  //   path: 'checker',
+  //   canActivate: [AuthGuard, RoleGuard],
+  //   canLoad: [AuthGuard, RoleGuard],
+  //   loadChildren: () =>
+  //     import('./features/checker/checker.module').then(
+  //       (m) => m.CheckerModule,
+  //     ),
+  //   data: { title: 'Checker', roles: ['CHECKER', 'ADMIN'] as Role[] },
+  // },
 
   // Admin (ADMIN only)
-  {
-    path: 'admin',
-    canActivate: [AuthGuard, RoleGuard],
-    canLoad: [AuthGuard, RoleGuard],
-    loadChildren: () =>
-      import('./features/admin/admin.module').then((m) => m.AdminModule),
-    data: { title: 'Admin', roles: ['ADMIN'] as Role[] },
-  },
+  // {
+  //   path: 'admin',
+  //   canActivate: [AuthGuard, RoleGuard],
+  //   canLoad: [AuthGuard, RoleGuard],
+  //   loadChildren: () =>
+  //     import('./features/admin/admin.module').then((m) => m.AdminModule),
+  //   data: { title: 'Admin', roles: ['ADMIN'] as Role[] },
+  // },
 
   // Fallback
   { path: '**', redirectTo: 'events' },

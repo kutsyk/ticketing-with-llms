@@ -8,7 +8,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 
 // Interceptors
-import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
@@ -16,7 +16,6 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { StorageService } from './services/storage.service';
-import { NotificationService } from './services/notification.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -29,10 +28,9 @@ import { NotificationService } from './services/notification.service';
     AuthService,
     ApiService,
     StorageService,
-    NotificationService,
 
     // HTTP interceptors (order matters)
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],

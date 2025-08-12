@@ -25,7 +25,7 @@ export class RoleGuard implements CanActivate {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
     const expectedRoles = route.data['roles'] as string[];
-    const user = this.authService.getCurrentUser();
+    const user = this.authService.currentUser();
 
     if (!user || !expectedRoles.includes(user.role)) {
       // If no access, redirect to forbidden page or dashboard

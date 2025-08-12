@@ -52,8 +52,7 @@ export class RegisterComponent {
 
     this.loading = true;
     const { email, password } = this.registerForm.value;
-
-    this.authService.register(email, password).subscribe({
+    this.authService.register(this.registerForm.value).subscribe({
       next: () => {
         this.snackBar.open('Registration successful! Please check your email to verify your account.', 'Close', {
           duration: 5000

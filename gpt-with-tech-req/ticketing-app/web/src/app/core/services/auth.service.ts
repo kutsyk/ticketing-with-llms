@@ -45,7 +45,7 @@ export class AuthService {
 
   register(data: {
     email: string;
-    password: string;
+    password?: string;
     name?: string;
   }): Observable<LoginResponse> {
     return this.api.post<LoginResponse>('/auth/register', data).pipe(
@@ -55,6 +55,19 @@ export class AuthService {
         }
       })
     );
+  }
+
+
+  verifyEmail(token: string): Observable<{ message: string }> {
+    return this.api.post<{ message: string }>(`/api/verify-email`, { token });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<{ message: string }> {
+    return this.api.post<{ message: string }>(`/api/reset-password`, { token, newPassword });
+  }
+
+  forgotPassword(email: string): Observable<{ message: string }> {
+    return this.api.post<{ message: string }>(`/api/auth/forgot-password`, { email });
   }
 
   logout(): void {
