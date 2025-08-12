@@ -1,0 +1,24 @@
+<!-- web/src/app/features/auth/pages/verify-email/verify-email.component.html -->
+<div class="verify-email-container" *ngIf="!loading">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Email Verification</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="verified; else failed">
+        ✅ Your email has been successfully verified! You can now log in.
+      </p>
+      <ng-template #failed>
+        ❌ Verification failed. The link might be invalid or expired.
+      </ng-template>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" routerLink="/auth/login">Go to Login</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="loading-container" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+  <p>Verifying your email...</p>
+</div>

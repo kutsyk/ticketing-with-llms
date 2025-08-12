@@ -1,0 +1,16 @@
+<!-- web/src/app/layout/admin-layout/admin-layout.component.html -->
+<app-header></app-header>
+
+<div class="admin-layout">
+  <app-sidebar></app-sidebar>
+  <main class="admin-content">
+    <div class="admin-header">
+      <h1>{{ pageTitle }}</h1>
+    </div>
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<app-footer></app-footer>
+
+<app-loading-overlay *ngIf="loading$ | async"></app-loading-overlay>
