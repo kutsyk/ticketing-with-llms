@@ -3,9 +3,9 @@
  * api/scripts/generate-swagger.cjs
  *
  * Generates a static OpenAPI 3.0 JSON file from JSDoc comments in:
- *  - pages/api/**/*.js
- *  - src/pages/api/**/*.js  (if you ever move under src/)
- *  - docs/**/*.js           (for shared components/schemas)
+ *  - pages/api/*\/*.js
+ *  - src/pages/api/*\/*.js  (if you ever move under src/)
+ *  - docs/*\/*.js           (for shared components/schemas)
  *
  * Usage:
  *   node scripts/generate-swagger.cjs

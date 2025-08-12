@@ -10,22 +10,16 @@
     "dev": "next dev -p ${PORT:-3000}",
     "build": "next build",
     "start": "next start -p ${PORT:-3000}",
-
     "start:docker": "sh ./scripts/wait-for-it.sh db:5432 -- sh -lc \"npx prisma migrate deploy && node prisma/seed.cjs && npm run start\"",
-
     "lint": "eslint . --ext .js,.cjs,.mjs,.ts,.tsx",
     "format": "prettier --write .",
-
     "prisma:generate": "prisma generate",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
-    "prisma:seed": "node prisma/seed.cjs",
-
-    "swagger:gen": "node scripts/generate-swagger.cjs",
-    "templates:build": "node scripts/build-templates.cjs",
-
+    "prisma:seed": "node ./prisma/seed.cjs",
+    "swagger:gen": "node ./scripts/generate-swagger.cjs",
+    "templates:build": "node ./scripts/build-templates.cjs",
     "rebuild": "npm run prisma:generate && npm run swagger:gen && npm run templates:build && npm run build",
-
     "prebuild": "npm run prisma:generate && npm run swagger:gen && npm run templates:build",
     "postinstall": "prisma generate"
   },
@@ -42,16 +36,20 @@
     "pino": "^9.0.0",
     "pino-http": "^10.0.0",
     "qrcode": "^1.5.3",
-    "rate-limiter-flexible": "^2.5.3",
+    "rate-limiter-flexible": "^7.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "stripe": "^14.25.0",
+    "swagger-ui-express": "^5.0.1",
+    "swagger-ui-react": "^5.27.1",
     "uuid": "^9.0.1",
+    "yamljs": "^0.3.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^7.16.1",
+    "@types/react": "19.1.10",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.1.4",
     "mjml": "^4.15.3",
