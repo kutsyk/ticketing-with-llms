@@ -23,12 +23,12 @@ export const routes: Routes = [
   },
 
   // Events (public listing + details)
-  // {
-  //   path: 'events',
-  //   loadChildren: () =>
-  //     import('./features/events/events.module').then((m) => m.EventsModule),
-  //   data: { title: 'Events' },
-  // },
+  {
+    path: 'events',
+    loadChildren: () =>
+      import('./features/events/events.module').then((m) => m.EventsModule),
+    data: { title: 'Events' },
+  },
 
   // Checkout (requires login to complete purchase)
   // {

@@ -28,7 +28,7 @@ import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoadingOverlayComponent } from './shared/components/loading-overlay/loading-overlay.component';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule, DatePipe, NgIf } from '@angular/common';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 
@@ -60,6 +60,7 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
     MatSidenavModule,
     CommonModule,
     RouterOutlet,
+    DatePipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },

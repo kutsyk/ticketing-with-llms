@@ -22,26 +22,26 @@ export class EventsService {
 
   // List all events
   getAll(): Observable<Event[]> {
-    return this.api.get<Event[]>('/admin/events');
+    return this.api.get<Event[]>('/events');
   }
 
   // Get a single event by ID
   getById(id: string): Observable<Event> {
-    return this.api.get<Event>(`/admin/events/${id}`);
+    return this.api.get<Event>(`/events/${id}`);
   }
 
   // Create a new event
   create(data: Partial<Event>): Observable<Event> {
-    return this.api.post<Event>('/admin/events', data);
+    return this.api.post<Event>('/events', data);
   }
 
   // Update an event
   update(id: string, data: Partial<Event>): Observable<Event> {
-    return this.api.put<Event>(`/admin/events/${id}`, data);
+    return this.api.put<Event>(`/events/${id}`, data);
   }
 
   // Delete an event
   delete(id: string): Observable<void> {
-    return this.api.delete<void>(`/admin/events/${id}`);
+    return this.api.delete<void>(`/events/${id}`);
   }
 }
