@@ -1,7 +1,7 @@
 // pages/api/admin/events/index.js
 
-import prisma from '../../../../../lib/db/client.js';
-import { verifyToken } from '../../../../../lib/auth/jwt.js';
+import prisma from '../../../../lib/db/client.js';
+import { verifyToken } from '../../../../lib/auth/jwt.js';
 
 /**
  * @openapi
@@ -104,7 +104,7 @@ export default async function handler(req, res) {
         where,
         take,
         skip,
-        orderBy: { start_date: 'desc' }
+        orderBy: { starts_at: 'desc' }
       }),
       prisma.event.count({ where })
     ]);
@@ -123,7 +123,7 @@ export default async function handler(req, res) {
       data: {
         name: String(name),
         description: description ? String(description) : null,
-        start_date: new Date(start_date),
+        starts_at: new Date(start_date),
         end_date: new Date(end_date),
         venue: String(venue),
         capacity: capacity ? parseInt(capacity, 10) : null,

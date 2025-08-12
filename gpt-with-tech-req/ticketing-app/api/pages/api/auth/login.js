@@ -1,7 +1,7 @@
 // pages/api/auth/login.js
 import prisma from '../../../lib/db/client';
 import { verifyPassword } from '../../../lib/auth/hash';
-import { signToken } from '../../../lib/auth/jwt';
+import { generateToken } from '../../../lib/auth/jwt';
 import { z } from 'zod';
 import rateLimit from '../../../middleware/rate-limit';
 
@@ -101,7 +101,7 @@ export default async function handler(req, res) {
   }
 
   // Create JWT
-  const token = signToken({
+  const token = generateToken({
     id: user.id,
     role: user.role,
     email: user.email,
