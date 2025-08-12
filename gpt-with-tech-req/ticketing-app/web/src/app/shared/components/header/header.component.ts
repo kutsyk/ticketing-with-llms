@@ -17,7 +17,7 @@ export class HeaderComponent {
   isLoggedIn$: Observable<boolean>;
 
   constructor(private authService: AuthService) {
-    this.user$ = this.authService.user$;
+    this.user$ = this.authService.currentUser$;
     this.isLoggedIn$ = this.authService.isLoggedIn$;
   }
 

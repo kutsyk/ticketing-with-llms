@@ -19,6 +19,9 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<any | null>;
   public currentUser$: Observable<any | null>;
 
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
   constructor(private api: ApiService, private router: Router) {
     const storedUser = localStorage.getItem(this.USER_KEY);
     this.currentUserSubject = new BehaviorSubject<any | null>(
