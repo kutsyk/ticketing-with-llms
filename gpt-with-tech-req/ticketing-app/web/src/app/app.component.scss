@@ -1,0 +1,54 @@
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+
+  .app-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  a[mat-button] {
+    color: white;
+    text-decoration: none;
+
+    &.active {
+      font-weight: bold;
+      border-bottom: 2px solid white;
+    }
+  }
+}
+
+.app-container {
+  height: calc(100vh - 64px); // Account for toolbar height
+}
+
+mat-sidenav {
+  width: 240px;
+  background-color: #fafafa;
+
+  a.mat-list-item {
+    font-size: 0.95rem;
+
+    mat-icon {
+      margin-right: 8px;
+    }
+
+    &.active {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+.app-content {
+  padding: 16px;
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 64px);
+}

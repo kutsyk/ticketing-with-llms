@@ -1,1 +1,132 @@
-{ "app": { "title": "Ticketing App" } }
+{
+  "app": {
+    "title": "Ticketing Platform",
+    "logout": "Log out",
+    "language": "Language",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search...",
+    "actions": "Actions"
+  },
+  "nav": {
+    "home": "Home",
+    "events": "Events",
+    "myTickets": "My Tickets",
+    "profile": "Profile",
+    "checker": "Checker",
+    "seller": "Seller",
+    "admin": "Admin Dashboard",
+    "users": "Users",
+    "ticketTypes": "Ticket Types",
+    "payments": "Payments",
+    "auditLogs": "Audit Logs"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "resetPassword": "Reset Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Name",
+    "signInGoogle": "Sign in with Google",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "invalidCredentials": "Invalid email or password",
+    "verifyEmail": "Verify your email",
+    "verificationSent": "Verification email sent"
+  },
+  "profile": {
+    "title": "My Profile",
+    "updateSuccess": "Profile updated successfully",
+    "updateError": "Failed to update profile"
+  },
+  "events": {
+    "listTitle": "Events",
+    "createTitle": "Create Event",
+    "editTitle": "Edit Event",
+    "name": "Event Name",
+    "description": "Description",
+    "date": "Date",
+    "location": "Location",
+    "created": "Event created successfully",
+    "updated": "Event updated successfully",
+    "deleted": "Event deleted successfully",
+    "noEvents": "No events available"
+  },
+  "tickets": {
+    "listTitle": "My Tickets",
+    "id": "Ticket ID",
+    "status": "Status",
+    "issuedAt": "Issued At",
+    "expiresAt": "Expires At",
+    "resend": "Resend Ticket",
+    "validated": "Ticket validated successfully",
+    "invalid": "Invalid or expired ticket"
+  },
+  "ticketTypes": {
+    "listTitle": "Ticket Types",
+    "createTitle": "Create Ticket Type",
+    "editTitle": "Edit Ticket Type",
+    "name": "Name",
+    "price": "Price",
+    "currency": "Currency",
+    "quantity": "Quantity",
+    "created": "Ticket type created successfully",
+    "updated": "Ticket type updated successfully",
+    "deleted": "Ticket type deleted successfully"
+  },
+  "checker": {
+    "title": "Ticket Checker",
+    "scan": "Scan QR Code",
+    "manualEntry": "Enter Ticket Code",
+    "validate": "Validate Ticket",
+    "valid": "Ticket is valid",
+    "invalid": "Ticket is invalid or already used"
+  },
+  "seller": {
+    "title": "Issue Ticket",
+    "event": "Select Event",
+    "ticketType": "Select Ticket Type",
+    "email": "Delivery Email",
+    "issue": "Issue Ticket",
+    "success": "Ticket issued successfully"
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "users": {
+      "listTitle": "Users",
+      "id": "ID",
+      "role": "Role",
+      "created": "User created successfully",
+      "updated": "User updated successfully",
+      "deleted": "User deleted successfully"
+    },
+    "payments": {
+      "listTitle": "Payments",
+      "id": "Payment ID",
+      "amount": "Amount",
+      "status": "Status",
+      "date": "Date"
+    },
+    "auditLogs": {
+      "listTitle": "Audit Logs",
+      "id": "Log ID",
+      "actor": "Actor",
+      "action": "Action",
+      "entity": "Entity",
+      "entityId": "Entity ID",
+      "timestamp": "Timestamp"
+    }
+  },
+  "errors": {
+    "network": "Network error. Please try again.",
+    "unauthorized": "You are not authorized to perform this action",
+    "notFound": "Not found"
+  }
+}
