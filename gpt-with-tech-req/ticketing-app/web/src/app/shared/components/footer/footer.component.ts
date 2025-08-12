@@ -4,10 +4,10 @@ import { MatToolbar } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-footer',
-  standalone: true,
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
-  imports: [MatToolbar]
+  // standalone: true,
+  // imports: [MatToolbar]
 })
 export class FooterComponent {
   currentYear: number = new Date().getFullYear();

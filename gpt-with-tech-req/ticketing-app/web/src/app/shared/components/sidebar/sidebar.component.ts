@@ -7,10 +7,10 @@ import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  standalone: true,
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  imports: [MatIcon, MatSidenavContent, MatNavList, MatToolbar, MatSidenav, MatSidenavContainer, RouterOutlet]
+  // standalone: true,
+  // imports: [MatIcon, MatSidenavContent, MatNavList, MatToolbar, MatSidenav, MatSidenavContainer, RouterOutlet]
 })
 export class SidebarComponent {
   constructor(private router: Router) {}

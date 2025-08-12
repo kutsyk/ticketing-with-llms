@@ -11,10 +11,10 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  imports: [MatIcon, MatMenu, MatToolbar, CommonModule]
+  // standalone: true,
+  // imports: [MatIcon, MatMenu, MatToolbar, CommonModule]
 })
 export class HeaderComponent {
   @Output() toggleSidenav = new EventEmitter<void>();

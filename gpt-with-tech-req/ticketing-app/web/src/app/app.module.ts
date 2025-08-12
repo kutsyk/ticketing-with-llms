@@ -29,10 +29,18 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoadingOverlayComponent } from './shared/components/loading-overlay/loading-overlay.component';
 import { CommonModule, NgIf } from '@angular/common';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent,
+    LoadingOverlayComponent,
+    MainLayoutComponent,
+    AdminLayoutComponent,
   ],
   imports: [
     BrowserModule,

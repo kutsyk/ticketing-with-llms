@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './core/services/auth.service';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 type Role = 'USER' | 'SELLER' | 'CHECKER' | 'ADMIN';
 

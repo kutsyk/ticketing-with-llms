@@ -13,16 +13,16 @@ import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/mat
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss'],
-  standalone: true,
-  imports: [    HeaderComponent, 
-    FooterComponent, 
-    SidebarComponent,
-    LoadingOverlayComponent,
-    RouterOutlet,
-    MatSidenavContent,
-    MatSidenavContainer,
-    MatSidenav
-]
+//   standalone: true,
+//   imports: [    HeaderComponent, 
+//     FooterComponent, 
+//     SidebarComponent,
+//     LoadingOverlayComponent,
+//     RouterOutlet,
+//     MatSidenavContent,
+//     MatSidenavContainer,
+//     MatSidenav
+// ]
 })
 export class AdminLayoutComponent {
   pageTitle = '';
