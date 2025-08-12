@@ -9,7 +9,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchStatus() {
       try {
-        const res = await fetch('/api/status');
+        const res = await fetch('/api/healthz');
         if (!res.ok) throw new Error('Failed to fetch status');
         const data = await res.json();
         setStatus(data);
