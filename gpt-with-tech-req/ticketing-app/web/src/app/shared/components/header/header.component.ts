@@ -4,11 +4,17 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { User } from '../../../core/models/user.model';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenu } from '@angular/material/menu';
+import { MatToolbar } from '@angular/material/toolbar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  imports: [MatIcon, MatMenu, MatToolbar, CommonModule]
 })
 export class HeaderComponent {
   @Output() toggleSidenav = new EventEmitter<void>();

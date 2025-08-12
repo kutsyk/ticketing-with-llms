@@ -2,11 +2,14 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoadingService } from '../../../core/services/loading.service';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-loading-overlay',
+  standalone: true,
   templateUrl: './loading-overlay.component.html',
   styleUrls: ['./loading-overlay.component.scss'],
+  imports: [MatProgressSpinner]
 })
 export class LoadingOverlayComponent {
   // Emits true when there are active HTTP requests

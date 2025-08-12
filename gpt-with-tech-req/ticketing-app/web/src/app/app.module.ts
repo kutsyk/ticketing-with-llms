@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 import { AppComponent } from './app.component';
 
@@ -17,9 +17,23 @@ import { MaterialModule } from './shared/material/material.module';
 import { AuthTokenInterceptor } from './core/interceptors/auth-token.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatSidenavContent, MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggle, MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { LoadingOverlayComponent } from './shared/components/loading-overlay/loading-overlay.component';
+import { CommonModule, NgIf } from '@angular/common';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -27,6 +41,20 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
     RouterModule,
     AppRoutingModule,
     MaterialModule,
+    MatIcon,
+    MatSidenavContent,
+    MatIconModule,
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    CommonModule,
+    RouterOutlet,
+    HeaderComponent, 
+    FooterComponent, 
+    LoadingOverlayComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },

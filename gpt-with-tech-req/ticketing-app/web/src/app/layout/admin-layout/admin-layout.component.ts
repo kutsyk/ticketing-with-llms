@@ -1,8 +1,12 @@
 // web/src/app/layout/admin-layout/admin-layout.component.ts
 import { Component } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { LoadingService } from '../../core/services/loading.service';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
+import { SidebarComponent } from 'src/app/shared/components/sidebar/sidebar.component';
+import { LoadingOverlayComponent } from 'src/app/shared/components/loading-overlay/loading-overlay.component';
 
 @Component({
   selector: 'app-admin-layout',
@@ -11,7 +15,7 @@ import { LoadingService } from '../../core/services/loading.service';
 })
 export class AdminLayoutComponent {
   pageTitle = '';
-  loading$ = this.loadingService.loading$;
+  loading$ = this.loadingService.isLoading$;
 
   constructor(
     private router: Router,

@@ -1,8 +1,14 @@
 // web/src/app/layout/main-layout/main-layout.component.ts
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Observable, Subscription, filter } from 'rxjs';
 import { LoadingService } from '../../core/services/loading.service';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
+import { SidebarComponent } from 'src/app/shared/components/sidebar/sidebar.component';
+import { LoadingOverlayComponent } from 'src/app/shared/components/loading-overlay/loading-overlay.component';
+import { MatSidenav, MatSidenavContainer, MatSidenavContent, MatSidenavModule } from '@angular/material/sidenav';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main-layout',
