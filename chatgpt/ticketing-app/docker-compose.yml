@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-tickets}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tickets}
+      POSTGRES_DB: ${POSTGRES_DB:-tickets}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    ports:
+      - "8025:8025"
+
+  api:
+    build: ./api
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+      mailhog:
+        condition: service_started
+    ports:
+      - "3000:3000"
+    command: ["node", "dist/main.js"]
+
+  web:
+    build:
+      context: ./web
+      args:
+        - API_BASE_URL=${API_BASE_URL:-http://localhost:3000}
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+
+volumes:
+  db_data:

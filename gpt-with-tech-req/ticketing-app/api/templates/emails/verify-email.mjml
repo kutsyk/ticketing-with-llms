@@ -1,0 +1,78 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Helvetica, Arial, sans-serif" color="#333333" />
+      <mj-text font-size="16px" line-height="1.5" />
+      <mj-button background-color="#1a73e8" color="white" border-radius="4px" padding="12px 20px" />
+    </mj-attributes>
+
+    <mj-preview>Verify your email address</mj-preview>
+    <mj-style inline="inline">
+      .footer-link a { color: #999999 !important; text-decoration: none; }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#f4f4f4">
+    <!-- Header -->
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        <mj-image src="https://yourdomain.com/logo.png" alt="Company Logo" width="150px" padding-bottom="10px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Title -->
+    <mj-section background-color="#ffffff" padding="0 20px 10px">
+      <mj-column>
+        <mj-text font-size="20px" font-weight="bold">
+          Verify Your Email
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Body -->
+    <mj-section background-color="#ffffff" padding="0 20px 20px">
+      <mj-column>
+        <mj-text>
+          Hi {{name}},
+        </mj-text>
+        <mj-text>
+          Thank you for signing up. Please confirm that <strong>{{email}}</strong> is your email address by clicking the button below.
+        </mj-text>
+
+        <mj-button href="{{verificationUrl}}" align="left">
+          Verify Email Address
+        </mj-button>
+
+        <mj-text font-size="14px" color="#555555">
+          This link will expire in {{expiresIn}}.  
+          If you did not create an account, no further action is required.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Divider -->
+    <mj-section background-color="#ffffff" padding="0 20px">
+      <mj-column>
+        <mj-divider border-width="1px" border-color="#eeeeee" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        <mj-text font-size="12px" color="#999999" align="center" class="footer-link">
+          © {{year}} Your Company, Inc.  
+          <a href="{{supportUrl}}">Support</a> • <a href="{{unsubscribeUrl}}">Unsubscribe</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="10px" color="#cccccc" align="center">
+          This is an automated message, please do not reply.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

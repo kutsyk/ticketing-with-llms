@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: appdb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  stripe-mock:
+    image: stripe/stripe-mock:latest
+    ports:
+      - "12111:12111"
+    command: ["--port", "12111"]
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
+  api:
+    build: ./api
+    depends_on:
+      - db
+      - mailhog
+    env_file:
+      - ./api/.env
+    ports:
+      - "3000:3000"
+    command: sh -c "npm run dev"
+
+volumes:
+  db_data:

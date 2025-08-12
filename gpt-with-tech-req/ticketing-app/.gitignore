@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.next/
+.angular/
+.env
+api/.env*
+web/.env*
+coverage/

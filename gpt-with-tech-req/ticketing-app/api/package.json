@@ -1,0 +1,35 @@
+{
+  "name": "ticketing-api",
+  "version": "1.0.0",
+  "description": "Ticketing platform API built with Next.js API routes, Prisma, PostgreSQL, and Swagger UI",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p ${PORT:-3000}",
+    "build": "next build",
+    "start": "next start -p ${PORT:-3000}",
+    "lint": "eslint .",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "generate": "prisma generate",
+    "seed": "node prisma/seed.cjs",
+    "swagger": "node scripts/generate-swagger.cjs > public/swagger.json"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2",
+    "next": "14.1.4",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.1.4",
+    "prisma": "^5.22.0"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  }
+}

@@ -1,0 +1,214 @@
+// api/prisma/schema.prisma
+
+// ---------- Prisma Generators & Datasource ----------
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- Enums ----------
+enum Role {
+  USER
+  SELLER
+  CHECKER
+  ADMIN
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum TicketStatus {
+  ISSUED
+  USED
+  REVOKED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  REQUIRES_ACTION
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum ScanResult {
+  VALIDATED
+  ALREADY_USED
+  INVALID
+  EXPIRED
+  REVOKED
+}
+
+// ---------- Models ----------
+
+// Users
+model User {
+  id                String        @id @default(uuid())
+  email             String        @unique
+  email_verified_at DateTime?
+  password_hash     String?
+  name              String?
+  avatar_url        String?
+  role              Role          @default(USER)
+  created_at        DateTime      @default(now())
+  updated_at        DateTime      @updatedAt
+
+  // Relations
+  oauth_accounts    OAuthAccount[]
+  tickets           Ticket[]
+  payments          Payment[]
+  scans             TicketScan[]  @relation("ScannedByUser")
+  audit_logs        AuditLog[]
+
+  @@map("users")
+  @@index([email], map: "idx_users_email")
+}
+
+// OAuth accounts (e.g., Google)
+model OAuthAccount {
+  id                   String   @id @default(uuid())
+  user_id              String
+  provider             String
+  provider_account_id  String
+  access_token         String?
+  refresh_token        String?
+  expires_at           DateTime?
+
+  // Relations
+  user                 User     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@unique([provider, provider_account_id], map: "uq_oauth_provider_account")
+  @@map("oauth_accounts")
+}
+
+// Events
+model Event {
+  id           String        @id @default(uuid())
+  name         String
+  description  String?
+  venue        String?
+  starts_at    DateTime
+  ends_at      DateTime
+  timezone     String?
+  status       EventStatus   @default(DRAFT)
+  created_at   DateTime      @default(now())
+  updated_at   DateTime      @updatedAt
+
+  // Relations
+  ticket_types TicketType[]
+
+  @@map("events")
+}
+
+// Ticket Types
+model TicketType {
+  id              String   @id @default(uuid())
+  event_id        String
+  name            String
+  description     String?
+  price_cents     Int
+  currency        String
+  quantity_total  Int
+  quantity_sold   Int      @default(0)
+  sales_start_at  DateTime?
+  sales_end_at    DateTime?
+
+  // Relations
+  event           Event    @relation(fields: [event_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tickets         Ticket[]
+
+  @@map("ticket_types")
+  @@index([event_id], map: "idx_ticket_types_event_id")
+}
+
+// Tickets
+model Ticket {
+  id              String        @id @default(uuid())
+  user_id         String?
+  ticket_type_id  String
+  serial          String        @unique
+  qr_token        String        @unique
+  qr_version      Int           @default(1)
+  status          TicketStatus  @default(ISSUED)
+  issued_at       DateTime      @default(now())
+  used_at         DateTime?
+  expires_at      DateTime?
+  delivery_email  String
+  purchaser_name  String
+  payment_id      String?
+
+  // Relations
+  user            User?         @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  ticket_type     TicketType    @relation(fields: [ticket_type_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  payment         Payment?      @relation(fields: [payment_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  scans           TicketScan[]
+
+  @@map("tickets")
+  @@index([ticket_type_id], map: "idx_tickets_ticket_type_id")
+  @@index([user_id], map: "idx_tickets_user_id")
+  // Unique constraints already create indexes for serial and qr_token, included above for clarity.
+}
+
+// Payments
+model Payment {
+  id                   String         @id @default(uuid())
+  user_id              String?
+  provider             String         // STRIPE | MOCK (stored as string to keep provider-flexible)
+  provider_payment_id  String?
+  amount_cents         Int
+  currency             String
+  status               PaymentStatus
+  created_at           DateTime       @default(now())
+  updated_at           DateTime       @updatedAt
+
+  // Relations
+  user                 User?          @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  tickets              Ticket[]
+
+  @@map("payments")
+  @@index([provider_payment_id], map: "idx_payments_provider_payment_id")
+}
+
+// Ticket Scans (validation attempts)
+model TicketScan {
+  id                   String     @id @default(uuid())
+  ticket_id            String
+  scanned_by_user_id   String
+  result               ScanResult
+  user_agent           String?
+  ip_address           String?
+  scanned_at           DateTime   @default(now())
+
+  // Relations
+  ticket               Ticket     @relation(fields: [ticket_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  scanned_by           User       @relation("ScannedByUser", fields: [scanned_by_user_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  @@map("ticket_scans")
+  @@index([ticket_id], map: "idx_scans_ticket_id")
+  @@index([scanned_by_user_id], map: "idx_scans_scanned_by_user_id")
+}
+
+// Audit Logs (admin/system actions)
+model AuditLog {
+  id             String    @id @default(uuid())
+  actor_user_id  String?
+  action         String
+  entity         String
+  entity_id      String
+  diff           Json?
+  created_at     DateTime  @default(now())
+
+  // Relations
+  actor_user     User?     @relation(fields: [actor_user_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  @@map("audit_logs")
+  @@index([entity, entity_id], map: "idx_audit_logs_entity_entity_id")
+  @@index([actor_user_id], map: "idx_audit_logs_actor_user_id")
+}
