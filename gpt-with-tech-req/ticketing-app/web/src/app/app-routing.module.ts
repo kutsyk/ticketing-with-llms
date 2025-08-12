@@ -3,11 +3,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
+import { AuthTokenInterceptor } from './core/interceptors/auth-token.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // RBAC roles must match backend: USER | SELLER | CHECKER | ADMIN
 type Role = 'USER' | 'SELLER' | 'CHECKER' | 'ADMIN';
 
-const routes: Routes = [
+export const routes: Routes = [
   // Public landing -> redirect to events
   { path: '', pathMatch: 'full', redirectTo: 'events' },
 
@@ -95,6 +98,10 @@ const routes: Routes = [
       anchorScrolling: 'enabled',
       paramsInheritanceStrategy: 'always',
     }),
+  ],
+   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   exports: [RouterModule],
 })

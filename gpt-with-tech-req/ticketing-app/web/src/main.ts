@@ -5,10 +5,8 @@ import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app/app.component';
-import { appRoutes } from './app/app.routes';
+import { routes } from './app/app-routing.module';
 import { environment } from './environments/environment';
-import { authInterceptor } from './app/core/interceptors/auth.interceptor';
-import { errorInterceptor } from './app/core/interceptors/error.interceptor';
 
 if (environment.production) {
   enableProdMode();
@@ -16,10 +14,7 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(appRoutes),
-    provideHttpClient(
-      withInterceptors([authInterceptor, errorInterceptor])
-    ),
+    provideRouter(routes),
     provideAnimations()
   ]
 }).catch(err => console.error(err));
