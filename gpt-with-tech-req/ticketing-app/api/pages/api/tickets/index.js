@@ -86,7 +86,7 @@ export default async function handler(req, res) {
     if (eventId) where.event_id = eventId;
     if (me.role !== 'ADMIN') where.user_id = me.id;
 
-    const tickets = await prisma.tickets.findMany({
+    const tickets = await prisma.ticket.findMany({
       where,
       include: { event: true, ticket_type: true }
     });

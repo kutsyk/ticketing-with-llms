@@ -27,22 +27,22 @@ export default function withRateLimit(handler, options = {}) {
     const token = req.headers.authorization?.replace(/^Bearer\s+/, '');
     const key = token ? `${keyPrefix}:token:${token}` : `${keyPrefix}:ip:${ip}`;
 
-    const { success, remaining, reset } = await limiter.check(key, limit, window);
+    // const { success, remaining, reset } = await limiter.check(key, limit, window);
 
-    if (!success) {
-      res.setHeader('Retry-After', Math.ceil(reset - Date.now() / 1000));
-      return res.status(429).json({
-        error: 'Too many requests',
-        limit,
-        remaining: 0,
-        reset,
-      });
-    }
+    // if (!success) {
+    //   res.setHeader('Retry-After', Math.ceil(reset - Date.now() / 1000));
+    //   return res.status(429).json({
+    //     error: 'Too many requests',
+    //     limit,
+    //     remaining: 0,
+    //     reset,
+    //   });
+    // }
 
     // Pass rate limit info to downstream handlers for optional logging
-    res.setHeader('X-RateLimit-Limit', limit);
-    res.setHeader('X-RateLimit-Remaining', remaining);
-    res.setHeader('X-RateLimit-Reset', reset);
+    // res.setHeader('X-RateLimit-Limit', limit);
+    // res.setHeader('X-RateLimit-Remaining', remaining);
+    // res.setHeader('X-RateLimit-Reset', reset);
 
     return handler(req, res);
   };

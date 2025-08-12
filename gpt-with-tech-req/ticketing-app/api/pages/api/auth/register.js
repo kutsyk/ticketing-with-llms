@@ -74,8 +74,8 @@ export default async function handler(req, res) {
   }
 
   // Apply rate limiting
-  const limited = await rateLimit(req, res);
-  if (limited) return;
+  // const limited = await rateLimit(req, res);
+  // if (limited) return;
 
   // Validate request body
   const parseResult = registerSchema.safeParse(req.body);
@@ -85,7 +85,7 @@ export default async function handler(req, res) {
   const { email, password, name } = parseResult.data;
 
   // Check if email is already in use
-  const existing = await prisma.users.findUnique({
+  const existing = await prisma.user.findUnique({
     where: { email: email.toLowerCase() },
   });
   if (existing) {
@@ -96,7 +96,7 @@ export default async function handler(req, res) {
   const password_hash = await hashPassword(password);
 
   // Create new user
-  const user = await prisma.users.create({
+  const user = await prisma.user.create({
     data: {
       email: email.toLowerCase(),
       password_hash,

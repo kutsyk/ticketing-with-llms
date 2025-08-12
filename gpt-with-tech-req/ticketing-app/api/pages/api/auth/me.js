@@ -70,7 +70,7 @@ export default async function handler(req, res) {
   }
 
   // Fetch user from DB
-  const user = await prisma.users.findUnique({
+  const user = await prisma.user.findUnique({
     where: { id: payload.id },
     select: {
       id: true,

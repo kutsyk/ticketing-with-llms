@@ -56,7 +56,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid verification token' });
   }
 
-  const user = await prisma.users.findUnique({
+  const user = await prisma.user.findUnique({
     where: { id: payload.id },
     select: { id: true, email_verified_at: true },
   });
@@ -69,7 +69,7 @@ export default async function handler(req, res) {
     return res.status(200).json({ message: 'Email already verified' });
   }
 
-  await prisma.users.update({
+  await prisma.user.update({
     where: { id: payload.id },
     data: { email_verified_at: new Date() },
   });

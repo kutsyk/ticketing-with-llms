@@ -107,7 +107,7 @@ export default async function handler(req, res) {
   const skip = Math.max(parseInt(offset, 10) || 0, 0);
 
   const [items, total] = await Promise.all([
-    prisma.tickets.findMany({
+    prisma.ticket.findMany({
       where,
       take,
       skip,
@@ -118,7 +118,7 @@ export default async function handler(req, res) {
         ticket_type: { select: { id: true, name: true } }
       }
     }),
-    prisma.tickets.count({ where })
+    prisma.ticket.count({ where })
   ]);
 
   return res.json({ total, limit: take, offset: skip, items });

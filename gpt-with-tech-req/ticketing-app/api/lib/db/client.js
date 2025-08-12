@@ -9,7 +9,7 @@ let prisma;
  * Ensure we don't create multiple PrismaClient instances in dev.
  * In production, a single instance is created per lambda/container lifecycle.
  */
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
   prisma = new PrismaClient();
 } else {
   // @ts-ignore

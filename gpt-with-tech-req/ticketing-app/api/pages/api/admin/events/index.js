@@ -100,13 +100,13 @@ export default async function handler(req, res) {
     const skip = Math.max(parseInt(offset, 10) || 0, 0);
 
     const [items, total] = await Promise.all([
-      prisma.events.findMany({
+      prisma.event.findMany({
         where,
         take,
         skip,
         orderBy: { start_date: 'desc' }
       }),
-      prisma.events.count({ where })
+      prisma.event.count({ where })
     ]);
 
     return res.json({ total, limit: take, offset: skip, items });
@@ -119,7 +119,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const newEvent = await prisma.events.create({
+    const newEvent = await prisma.event.create({
       data: {
         name: String(name),
         description: description ? String(description) : null,

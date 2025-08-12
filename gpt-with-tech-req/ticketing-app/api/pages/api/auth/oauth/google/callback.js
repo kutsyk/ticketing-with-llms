@@ -91,10 +91,10 @@ export default async function handler(req, res) {
     };
 
     // Check if user exists
-    let user = await prisma.users.findUnique({ where: { email: profile.email } });
+    let user = await prisma.user.findUnique({ where: { email: profile.email } });
 
     if (!user) {
-      user = await prisma.users.create({
+      user = await prisma.user.create({
         data: {
           email: profile.email,
           name: profile.name,

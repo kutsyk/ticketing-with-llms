@@ -76,8 +76,8 @@ export default async function handler(req, res) {
   }
 
   // Apply rate limiting
-  const limited = await rateLimit(req, res);
-  if (limited) return;
+  // const limited = await rateLimit(req, res);
+  // if (limited) return;
 
   // Validate request body
   const parseResult = loginSchema.safeParse(req.body);
@@ -87,7 +87,7 @@ export default async function handler(req, res) {
   const { email, password } = parseResult.data;
 
   // Find user
-  const user = await prisma.users.findUnique({
+  const user = await prisma.user.findUnique({
     where: { email: email.toLowerCase() },
   });
   if (!user) {

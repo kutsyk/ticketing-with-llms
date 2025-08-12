@@ -103,7 +103,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    const ticket = await prisma.tickets.findUnique({
+    const ticket = await prisma.ticket.findUnique({
       where: { id },
       include: {
         user: { select: { id: true, email: true, name: true } },
@@ -127,12 +127,12 @@ export default async function handler(req, res) {
       data.notes = String(notes);
     }
 
-    const before = await prisma.tickets.findUnique({ where: { id } });
+    const before = await prisma.ticket.findUnique({ where: { id } });
     if (!before) {
       return res.status(404).json({ error: 'Not found' });
     }
 
-    const updated = await prisma.tickets.update({
+    const updated = await prisma.ticket.update({
       where: { id },
       data,
       include: {
@@ -156,12 +156,12 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'DELETE') {
-    const existing = await prisma.tickets.findUnique({ where: { id } });
+    const existing = await prisma.ticket.findUnique({ where: { id } });
     if (!existing) {
       return res.status(404).json({ error: 'Not found' });
     }
 
-    await prisma.tickets.delete({ where: { id } });
+    await prisma.ticket.delete({ where: { id } });
     await prisma.audit_logs.create({
       data: {
         actor_user_id: me.id,

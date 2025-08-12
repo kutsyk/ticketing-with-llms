@@ -58,7 +58,7 @@ export default async function handler(req, res) {
   }
 
   // Retrieve ticket with event info
-  const ticket = await prisma.tickets.findUnique({
+  const ticket = await prisma.ticket.findUnique({
     where: { id },
     include: { event: true, ticket_type: true }
   });

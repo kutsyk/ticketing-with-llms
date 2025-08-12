@@ -107,7 +107,7 @@ export default async function handler(req, res) {
 
   // GET — Retrieve ticket
   if (req.method === 'GET') {
-    const ticket = await prisma.tickets.findUnique({
+    const ticket = await prisma.ticket.findUnique({
       where: { id },
       include: { event: true, ticket_type: true }
     });
@@ -121,7 +121,7 @@ export default async function handler(req, res) {
   // PATCH — Update ticket
   if (req.method === 'PATCH') {
     const { status, email } = req.body || {};
-    const ticket = await prisma.tickets.findUnique({ where: { id } });
+    const ticket = await prisma.ticket.findUnique({ where: { id } });
     if (!ticket) return res.status(404).json({ error: 'Not found' });
     if (me.role !== 'ADMIN' && ticket.user_id !== me.id) {
       return res.status(403).json({ error: 'Forbidden' });
@@ -139,7 +139,7 @@ export default async function handler(req, res) {
       data.email = String(email);
     }
 
-    const updated = await prisma.tickets.update({
+    const updated = await prisma.ticket.update({
       where: { id },
       data,
       include: { event: true, ticket_type: true }
@@ -150,13 +150,13 @@ export default async function handler(req, res) {
 
   // DELETE — Remove ticket
   if (req.method === 'DELETE') {
-    const ticket = await prisma.tickets.findUnique({ where: { id } });
+    const ticket = await prisma.ticket.findUnique({ where: { id } });
     if (!ticket) return res.status(404).json({ error: 'Not found' });
     if (me.role !== 'ADMIN' && ticket.user_id !== me.id) {
       return res.status(403).json({ error: 'Forbidden' });
     }
 
-    await prisma.tickets.delete({ where: { id } });
+    await prisma.ticket.delete({ where: { id } });
     return res.status(204).end();
   }
 

@@ -123,7 +123,7 @@ export default async function handler(req, res) {
     const skip = Math.max(parseInt(offset, 10) || 0, 0);
 
     const [items, total] = await Promise.all([
-      prisma.users.findMany({
+      prisma.user.findMany({
         where,
         take,
         skip,
@@ -139,7 +139,7 @@ export default async function handler(req, res) {
           avatar_url: true
         }
       }),
-      prisma.users.count({ where })
+      prisma.user.count({ where })
     ]);
 
     return res.json({ total, limit: take, offset: skip, items });
@@ -151,13 +151,13 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const existing = await prisma.users.findUnique({ where: { email } });
+    const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
       return res.status(400).json({ error: 'Email already in use' });
     }
 
     const password_hash = await hashPassword(password);
-    const user = await prisma.users.create({
+    const user = await prisma.user.create({
       data: {
         email,
         name,

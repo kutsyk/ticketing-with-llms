@@ -126,7 +126,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    const user = await prisma.users.findUnique({
+    const user = await prisma.user.findUnique({
       where: { id },
       select: {
         id: true,
@@ -158,10 +158,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Cannot change your own role' });
     }
 
-    const before = await prisma.users.findUnique({ where: { id } });
+    const before = await prisma.user.findUnique({ where: { id } });
     if (!before) return res.status(404).json({ error: 'Not found' });
 
-    const updated = await prisma.users.update({
+    const updated = await prisma.user.update({
       where: { id },
       data,
       select: {
@@ -194,10 +194,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Cannot delete yourself' });
     }
 
-    const existing = await prisma.users.findUnique({ where: { id } });
+    const existing = await prisma.user.findUnique({ where: { id } });
     if (!existing) return res.status(404).json({ error: 'Not found' });
 
-    await prisma.users.delete({ where: { id } });
+    await prisma.user.delete({ where: { id } });
 
     await prisma.audit_logs.create({
       data: {

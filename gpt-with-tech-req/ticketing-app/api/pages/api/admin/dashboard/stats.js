@@ -73,14 +73,14 @@ export default async function handler(req, res) {
 
   const [totalUsers, totalEvents, totalTickets, payments, recentEventsRaw] =
     await Promise.all([
-      prisma.users.count(),
-      prisma.events.count(),
-      prisma.tickets.count(),
+      prisma.user.count(),
+      prisma.event.count(),
+      prisma.ticket.count(),
       prisma.payments.aggregate({
         _sum: { amount: true },
         where: { status: 'SUCCEEDED' }
       }),
-      prisma.events.findMany({
+      prisma.event.findMany({
         orderBy: { starts_at: 'desc' },
         take: 5,
         select: {

@@ -80,7 +80,7 @@ export default async function handler(req, res) {
   }
 
   // Verify event exists and belongs to this seller (or admin)
-  const event = await prisma.events.findUnique({
+  const event = await prisma.event.findUnique({
     where: { id: eventId },
     include: { seller: true }
   });

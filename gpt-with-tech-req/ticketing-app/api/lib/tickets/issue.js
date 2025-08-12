@@ -37,7 +37,7 @@ export async function issueTicket({
   });
 
   // Store in DB (with hashed token if opaque)
-  const ticket = await prisma.tickets.create({
+  const ticket = await prisma.ticket.create({
     data: {
       id: cryptoRandomId(),
       order_id: orderId,
@@ -70,7 +70,7 @@ export async function issueTicket({
  * @param {Buffer} params.qrPngBuffer
  */
 async function sendTicketEmail({ userId, ticket, qrPngBuffer }) {
-  const user = await prisma.users.findUnique({
+  const user = await prisma.user.findUnique({
     where: { id: userId },
     select: { email: true, name: true }
   });

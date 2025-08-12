@@ -105,21 +105,21 @@ export default async function handler(req, res) {
 
   let data = [];
   if (entity === 'users') {
-    data = await prisma.users.findMany({
+    data = await prisma.user.findMany({
       where,
       take,
       skip,
       select: { id: true, email: true, name: true, role: true, created_at: true, updated_at: true }
     });
   } else if (entity === 'events') {
-    data = await prisma.events.findMany({
+    data = await prisma.event.findMany({
       where,
       take,
       skip,
       select: { id: true, name: true, description: true, starts_at: true, ends_at: true, created_at: true }
     });
   } else if (entity === 'tickets') {
-    data = await prisma.tickets.findMany({
+    data = await prisma.ticket.findMany({
       where,
       take,
       skip,

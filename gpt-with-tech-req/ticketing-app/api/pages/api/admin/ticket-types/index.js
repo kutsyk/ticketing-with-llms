@@ -108,7 +108,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const eventExists = await prisma.events.findUnique({ where: { id: String(event_id) } });
+    const eventExists = await prisma.event.findUnique({ where: { id: String(event_id) } });
     if (!eventExists) {
       return res.status(404).json({ error: 'Event not found' });
     }

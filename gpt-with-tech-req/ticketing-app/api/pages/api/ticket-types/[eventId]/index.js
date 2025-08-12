@@ -71,7 +71,7 @@ export default async function handler(req, res) {
 
 async function listTicketTypes(req, res) {
   const { eventId } = req.query;
-  const event = await prisma.events.findUnique({ where: { id: eventId } });
+  const event = await prisma.event.findUnique({ where: { id: eventId } });
   if (!event) return res.status(404).json({ error: 'Event not found' });
 
   const ticketTypes = await prisma.ticket_types.findMany({ where: { event_id: eventId } });
@@ -92,7 +92,7 @@ async function createTicketType(req, res) {
   }
   if (me.role !== 'ADMIN') return res.status(403).json({ error: 'Forbidden' });
 
-  const event = await prisma.events.findUnique({ where: { id: eventId } });
+  const event = await prisma.event.findUnique({ where: { id: eventId } });
   if (!event) return res.status(404).json({ error: 'Event not found' });
 
   const { name, price, currency, quantity } = req.body || {};

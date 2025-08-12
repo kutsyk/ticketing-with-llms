@@ -106,18 +106,18 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    const event = await prisma.events.findUnique({ where: { id } });
+    const event = await prisma.event.findUnique({ where: { id } });
     if (!event) return res.status(404).json({ error: 'Not found' });
     return res.json(event);
   }
 
   if (req.method === 'PATCH') {
-    const existing = await prisma.events.findUnique({ where: { id } });
+    const existing = await prisma.event.findUnique({ where: { id } });
     if (!existing) return res.status(404).json({ error: 'Not found' });
 
     const { name, description, start_date, end_date, venue, capacity, cover_image_url } = req.body || {};
 
-    const updated = await prisma.events.update({
+    const updated = await prisma.event.update({
       where: { id },
       data: {
         ...(name !== undefined && { name: String(name) }),
@@ -144,10 +144,10 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'DELETE') {
-    const existing = await prisma.events.findUnique({ where: { id } });
+    const existing = await prisma.event.findUnique({ where: { id } });
     if (!existing) return res.status(404).json({ error: 'Not found' });
 
-    await prisma.events.delete({ where: { id } });
+    await prisma.event.delete({ where: { id } });
 
     await prisma.audit_logs.create({
       data: {

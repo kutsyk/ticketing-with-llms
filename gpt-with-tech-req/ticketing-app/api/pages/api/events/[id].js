@@ -89,7 +89,7 @@ export default async function handler(req, res) {
 
 async function getEvent(req, res) {
   const { id } = req.query;
-  const event = await prisma.events.findUnique({ where: { id } });
+  const event = await prisma.event.findUnique({ where: { id } });
   if (!event) return res.status(404).json({ error: 'Not found' });
   return res.status(200).json(event);
 }
@@ -108,7 +108,7 @@ async function updateEvent(req, res) {
   }
   if (me.role !== 'ADMIN') return res.status(403).json({ error: 'Forbidden' });
 
-  const existing = await prisma.events.findUnique({ where: { id } });
+  const existing = await prisma.event.findUnique({ where: { id } });
   if (!existing) return res.status(404).json({ error: 'Not found' });
 
   const { name, description, location, start_time, end_time } = req.body || {};
@@ -119,7 +119,7 @@ async function updateEvent(req, res) {
   if (start_time !== undefined) data.start_time = new Date(start_time);
   if (end_time !== undefined) data.end_time = new Date(end_time);
 
-  const updated = await prisma.events.update({ where: { id }, data });
+  const updated = await prisma.event.update({ where: { id }, data });
   return res.status(200).json(updated);
 }
 
@@ -137,9 +137,9 @@ async function deleteEvent(req, res) {
   }
   if (me.role !== 'ADMIN') return res.status(403).json({ error: 'Forbidden' });
 
-  const existing = await prisma.events.findUnique({ where: { id } });
+  const existing = await prisma.event.findUnique({ where: { id } });
   if (!existing) return res.status(404).json({ error: 'Not found' });
 
-  await prisma.events.delete({ where: { id } });
+  await prisma.event.delete({ where: { id } });
   return res.status(204).end();
 }
