@@ -1,8 +1,7 @@
 <!-- web/src/app/features/events/pages/list/events-list.component.html -->
 <div class="events-list">
   <h1>Events</h1>
-
-  <mat-card *ngFor="let event of events$ | async" class="event-card">
+  <mat-card *ngFor="let event of (events$ | async)" class="event-card">
     <mat-card-header>
       <mat-card-title>{{ event.name }}</mat-card-title>
       <mat-card-subtitle>{{ event.start_date | date: 'mediumDate' }}</mat-card-subtitle>

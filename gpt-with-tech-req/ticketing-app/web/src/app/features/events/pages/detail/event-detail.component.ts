@@ -4,7 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Event, EventsService } from '../../../../core/services/events.service';
+import { EventsService } from '../../../../core/services/events.service';
+import { Event } from 'src/app/core/models/event.model';
 
 @Component({
   selector: 'app-event-detail',

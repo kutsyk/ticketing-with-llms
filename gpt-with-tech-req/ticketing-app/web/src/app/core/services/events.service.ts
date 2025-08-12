@@ -1,18 +1,8 @@
 // web/src/app/core/services/events.service.ts
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ApiService } from './api.service';
-
-export interface Event {
-  id: string;
-  name: string;
-  description?: string;
-  location?: string;
-  start_date: string;
-  end_date?: string;
-  created_at?: string;
-  updated_at?: string;
-}
+import { ApiEvent, Event, mapApiEvent, Paginated } from '../models/event.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +12,8 @@ export class EventsService {
 
   // List all events
   getAll(): Observable<Event[]> {
-    return this.api.get<Event[]>('/events');
+    return this.api.get<Paginated<ApiEvent>>('/events').pipe(map(res => res.items.map(mapApiEvent))
+    );
   }
 
   // Get a single event by ID
