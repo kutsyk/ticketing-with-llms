@@ -1,0 +1,66 @@
+@use '@angular/material' as mat;
+
+// Define your custom Material color palettes
+$ticketing-primary: mat.define-palette(mat.$indigo-palette, 500, 300, 700);
+$ticketing-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$ticketing-warn: mat.define-palette(mat.$red-palette);
+
+// Create the Material theme
+$ticketing-theme: mat.define-light-theme((
+  color: (
+    primary: $ticketing-primary,
+    accent: $ticketing-accent,
+    warn: $ticketing-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+// Apply the theme
+@include mat.all-component-themes($ticketing-theme);
+
+// Global styles
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f7f8fa;
+  color: #333;
+}
+
+a {
+  color: mat.get-color-from-palette($ticketing-primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.container {
+  max-width: 1280px;
+  margin: auto;
+  padding: 1rem;
+}
+
+// Utility classes
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+// Material overrides
+.mat-toolbar {
+  background-color: mat.get-color-from-palette($ticketing-primary);
+  color: white;
+}
+
+.mat-card {
+  border-radius: 8px;
+}
