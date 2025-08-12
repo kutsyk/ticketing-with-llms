@@ -1,0 +1,133 @@
+### Health checks
+GET http://localhost:3000/api/healthz
+Accept: application/json
+
+###
+GET http://localhost:3000/api/readyz
+Accept: application/json
+
+
+### Auth — Login as Admin
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "Admin123!"
+}
+
+> {% client.global.set("auth_token", response.body.token) %}
+
+
+### Auth — Register new user
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user1@example.com",
+  "password": "Test123!",
+  "name": "Test User"
+}
+
+
+### Users — List (ADMIN only)
+GET http://localhost:3000/api/admin/users?q=&limit=10&offset=0
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+GET http://localhost:3000/api/admin/users/{{user_id}}
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+PATCH http://localhost:3000/api/admin/users/{{user_id}}
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "name": "Updated Name",
+  "role": "SELLER"
+}
+
+###
+DELETE http://localhost:3000/api/admin/users/{{user_id}}
+Authorization: Bearer {{auth_token}}
+
+
+### Events — Create (SELLER or ADMIN)
+POST http://localhost:3000/api/events
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "title": "Rock Concert",
+  "description": "An amazing rock concert",
+  "status": "DRAFT",
+  "date": "2025-09-01T20:00:00Z"
+}
+
+> {% client.global.set("event_id", response.body.id) %}
+
+###
+GET http://localhost:3000/api/events
+Accept: application/json
+
+###
+GET http://localhost:3000/api/events/{{event_id}}
+Accept: application/json
+
+###
+PATCH http://localhost:3000/api/events/{{event_id}}
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "status": "PUBLISHED"
+}
+
+###
+DELETE http://localhost:3000/api/events/{{event_id}}
+Authorization: Bearer {{auth_token}}
+
+
+### Tickets — Issue (CHECKER or ADMIN)
+POST http://localhost:3000/api/tickets
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "event_id": "{{event_id}}",
+  "status": "ISSUED",
+  "user_id": "{{user_id}}"
+}
+
+> {% client.global.set("ticket_id", response.body.id) %}
+
+###
+GET http://localhost:3000/api/tickets
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+GET http://localhost:3000/api/tickets/{{ticket_id}}
+Authorization: Bearer {{auth_token}}
+
+###
+PATCH http://localhost:3000/api/tickets/{{ticket_id}}
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "status": "USED"
+}
+
+###
+DELETE http://localhost:3000/api/tickets/{{ticket_id}}
+Authorization: Bearer {{auth_token}}
+
+
+### Me — Get current user
+GET http://localhost:3000/api/me
+Authorization: Bearer {{auth_token}}
+Accept: application/json

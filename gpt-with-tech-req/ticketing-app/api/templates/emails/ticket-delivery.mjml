@@ -1,0 +1,123 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Helvetica, Arial, sans-serif" color="#333333" />
+      <mj-text font-size="16px" line-height="1.5" />
+      <mj-button background-color="#1a73e8" color="#ffffff" border-radius="4px" padding="12px 20px" />
+      <mj-section padding="0" />
+      <mj-column padding="0" />
+    </mj-attributes>
+
+    <mj-preview>Your tickets are ready!</mj-preview>
+
+    <mj-style inline="inline">
+      .muted { color: #777 !important; }
+      .footer-link a { color: #999 !important; text-decoration: none; }
+      .ticket-table th, .ticket-table td {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        text-align: left;
+      }
+      .ticket-table th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+      }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#f4f4f4">
+    <!-- Header -->
+    <mj-section background-color="#ffffff" padding="20px 24px 10px">
+      <mj-column>
+        <mj-image src="https://yourdomain.com/logo.png" alt="Company Logo" width="150px" padding="0 0 8px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Title -->
+    <mj-section background-color="#ffffff" padding="0 24px">
+      <mj-column>
+        <mj-text font-size="20px" font-weight="bold">Your tickets are here!</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Body -->
+    <mj-section background-color="#ffffff" padding="8px 24px 20px">
+      <mj-column>
+        <mj-text>Hi {{name}},</mj-text>
+
+        <mj-text>
+          Thank you for your purchase! Your tickets for <strong>{{eventName}}</strong> are confirmed.
+          Below are your ticket details:
+        </mj-text>
+
+        <!-- Ticket Table -->
+        <mj-table css-class="ticket-table">
+          <tr>
+            <th>Ticket #</th>
+            <th>Seat</th>
+            <th>Type</th>
+            <th>Status</th>
+          </tr>
+          {{#each tickets}}
+          <tr>
+            <td>{{this.number}}</td>
+            <td>{{this.seat}}</td>
+            <td>{{this.type}}</td>
+            <td>{{this.status}}</td>
+          </tr>
+          {{/each}}
+        </mj-table>
+
+        <mj-text>
+          Event date & time: <strong>{{eventDate}}</strong><br />
+          Venue: <strong>{{venue}}</strong>
+        </mj-text>
+
+        <!-- Download button -->
+        <mj-button href="{{downloadUrl}}" align="left">
+          Download Tickets
+        </mj-button>
+
+        <mj-text class="muted" font-size="14px">
+          You can also access your tickets anytime from your account: <a href="{{accountUrl}}">{{accountUrl}}</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Divider -->
+    <mj-section background-color="#ffffff" padding="0 24px">
+      <mj-column>
+        <mj-divider border-width="1px" border-color="#eeeeee" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Tips -->
+    <mj-section background-color="#ffffff" padding="12px 24px 20px">
+      <mj-column>
+        <mj-text font-size="14px" class="muted">
+          Please arrive at least 30 minutes early. Bring a valid ID and the ticket (printed or digital).
+          For any questions, contact our support team.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#ffffff" padding="16px 24px 24px">
+      <mj-column>
+        <mj-text font-size="12px" align="center" class="footer-link">
+          © {{year}} Your Company, Inc. · <a href="{{supportUrl}}">Support</a>
+          · <a href="{{privacyUrl}}">Privacy</a> · <a href="{{unsubscribeUrl}}">Unsubscribe</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section padding="12px">
+      <mj-column>
+        <mj-text font-size="10px" align="center" color="#aaaaaa">
+          This is an automated message, please do not reply.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

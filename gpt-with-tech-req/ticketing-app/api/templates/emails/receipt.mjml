@@ -1,0 +1,131 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Helvetica, Arial, sans-serif" color="#333333" />
+      <mj-text font-size="16px" line-height="1.5" />
+      <mj-button background-color="#1a73e8" color="#ffffff" border-radius="4px" padding="12px 20px" />
+      <mj-section padding="0" />
+      <mj-column padding="0" />
+    </mj-attributes>
+
+    <mj-preview>Your payment receipt from {{companyName}}</mj-preview>
+
+    <mj-style inline="inline">
+      .muted { color: #777 !important; }
+      .footer-link a { color: #999 !important; text-decoration: none; }
+      .receipt-table th, .receipt-table td {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        text-align: left;
+      }
+      .receipt-table th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+      }
+      .total-row td {
+        font-weight: bold;
+        font-size: 15px;
+      }
+    </mj-style>
+  </mj-head>
+
+  <mj-body background-color="#f4f4f4">
+    <!-- Header -->
+    <mj-section background-color="#ffffff" padding="20px 24px 10px">
+      <mj-column>
+        <mj-image src="{{companyLogoUrl}}" alt="{{companyName}} Logo" width="150px" padding="0 0 8px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Title -->
+    <mj-section background-color="#ffffff" padding="0 24px">
+      <mj-column>
+        <mj-text font-size="20px" font-weight="bold">Payment Receipt</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Body -->
+    <mj-section background-color="#ffffff" padding="8px 24px 20px">
+      <mj-column>
+        <mj-text>Hi {{name}},</mj-text>
+
+        <mj-text>
+          Thank you for your purchase! This email is your receipt for the order placed on <strong>{{orderDate}}</strong>.
+        </mj-text>
+
+        <!-- Receipt Info -->
+        <mj-text>
+          <strong>Order Number:</strong> {{orderNumber}}<br/>
+          <strong>Payment Method:</strong> {{paymentMethod}}<br/>
+          <strong>Transaction ID:</strong> {{transactionId}}
+        </mj-text>
+
+        <!-- Items Table -->
+        <mj-table css-class="receipt-table">
+          <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+          </tr>
+          {{#each items}}
+          <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.quantity}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.subtotal}}</td>
+          </tr>
+          {{/each}}
+          <tr class="total-row">
+            <td colspan="3" align="right">Total</td>
+            <td>{{total}}</td>
+          </tr>
+        </mj-table>
+
+        <!-- Download Invoice -->
+        <mj-button href="{{invoiceUrl}}" align="left">
+          Download PDF Invoice
+        </mj-button>
+
+        <mj-text class="muted" font-size="14px">
+          You can also view your order details anytime from your account: <a href="{{accountUrl}}">{{accountUrl}}</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Divider -->
+    <mj-section background-color="#ffffff" padding="0 24px">
+      <mj-column>
+        <mj-divider border-width="1px" border-color="#eeeeee" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Support Note -->
+    <mj-section background-color="#ffffff" padding="12px 24px 20px">
+      <mj-column>
+        <mj-text font-size="14px" class="muted">
+          If you have any questions about this receipt, please contact our support team at <a href="{{supportUrl}}">{{supportEmail}}</a>.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section background-color="#ffffff" padding="16px 24px 24px">
+      <mj-column>
+        <mj-text font-size="12px" align="center" class="footer-link">
+          © {{year}} {{companyName}} · <a href="{{supportUrl}}">Support</a>
+          · <a href="{{privacyUrl}}">Privacy</a> · <a href="{{unsubscribeUrl}}">Unsubscribe</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section padding="12px">
+      <mj-column>
+        <mj-text font-size="10px" align="center" color="#aaaaaa">
+          This is an automated message, please do not reply.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

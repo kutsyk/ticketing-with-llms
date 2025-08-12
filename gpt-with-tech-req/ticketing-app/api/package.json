@@ -1,35 +1,62 @@
 {
   "name": "ticketing-api",
   "version": "1.0.0",
-  "description": "Ticketing platform API built with Next.js API routes, Prisma, PostgreSQL, and Swagger UI",
   "private": true,
+  "description": "Ticketing platform API built with Next.js API routes, Prisma (PostgreSQL), Stripe, Nodemailer, QR, and Swagger.",
+  "engines": {
+    "node": ">=18.17.0"
+  },
   "scripts": {
     "dev": "next dev -p ${PORT:-3000}",
     "build": "next build",
     "start": "next start -p ${PORT:-3000}",
-    "lint": "eslint .",
-    "migrate:dev": "prisma migrate dev",
-    "migrate:deploy": "prisma migrate deploy",
-    "generate": "prisma generate",
-    "seed": "node prisma/seed.cjs",
-    "swagger": "node scripts/generate-swagger.cjs > public/swagger.json"
+
+    "start:docker": "sh ./scripts/wait-for-it.sh db:5432 -- sh -lc \"npx prisma migrate deploy && node prisma/seed.cjs && npm run start\"",
+
+    "lint": "eslint . --ext .js,.cjs,.mjs,.ts,.tsx",
+    "format": "prettier --write .",
+
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:seed": "node prisma/seed.cjs",
+
+    "swagger:gen": "node scripts/generate-swagger.cjs",
+    "templates:build": "node scripts/build-templates.cjs",
+
+    "rebuild": "npm run prisma:generate && npm run swagger:gen && npm run templates:build && npm run build",
+
+    "prebuild": "npm run prisma:generate && npm run swagger:gen && npm run templates:build",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
+    "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
+    "ics": "^3.7.0",
     "jsonwebtoken": "^9.0.2",
     "next": "14.1.4",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "nodemailer": "^6.9.13",
+    "pino": "^9.0.0",
+    "pino-http": "^10.0.0",
+    "qrcode": "^1.5.3",
+    "rate-limiter-flexible": "^2.5.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "stripe": "^14.25.0",
+    "uuid": "^9.0.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^7.16.1",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.1.4",
-    "prisma": "^5.22.0"
-  },
-  "engines": {
-    "node": ">=18.17.0"
+    "mjml": "^4.15.3",
+    "prettier": "^3.3.3",
+    "prisma": "^5.22.0",
+    "swagger-jsdoc": "^6.2.8"
   }
 }
