@@ -1,0 +1,54 @@
+// web/src/app/shared/components/header/header.component.scss
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  background-color: #1976d2; // Material primary color
+  color: white;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+
+  .menu-button {
+    margin-right: 8px;
+  }
+
+  .app-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .user-name {
+    font-weight: 500;
+  }
+
+  .logout-button {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+@media (max-width: 600px) {
+  .app-title {
+    font-size: 1rem;
+  }
+
+  .header-right {
+    gap: 6px;
+  }
+}

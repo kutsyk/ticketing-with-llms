@@ -1,0 +1,37 @@
+<div class="qr-scanner-container">
+  <h2 mat-dialog-title>Scan QR Code</h2>
+
+  <mat-dialog-content>
+    <!-- QR scanner from zxing -->
+    <zxing-scanner
+      [device]="currentDevice"
+      (scanSuccess)="onCodeResult($event)"
+      [torch]="torchEnabled"
+      [tryHarder]="true"
+      class="qr-video"
+    >
+    </zxing-scanner>
+
+    <!-- Camera selection -->
+    <mat-form-field appearance="fill" class="camera-select">
+      <mat-label>Camera</mat-label>
+      <mat-select [(value)]="currentDevice">
+        <mat-option
+          *ngFor="let device of availableDevices"
+          [value]="device.deviceId"
+        >
+          {{ device.label || 'Camera ' + deviceIndex(device) }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Torch toggle -->
+    <mat-slide-toggle [(ngModel)]="torchEnabled">
+      Torch
+    </mat-slide-toggle>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+  </mat-dialog-actions>
+</div>

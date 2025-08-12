@@ -1,0 +1,60 @@
+<!-- web/src/app/shared/components/header/header.component.html -->
+
+<mat-toolbar color="primary" class="app-header">
+  <!-- Left side: menu toggle (for sidenav) -->
+  <button
+    mat-icon-button
+    (click)="toggleSidenav.emit()"
+    aria-label="Toggle navigation"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <!-- Application title -->
+  <span class="app-title">Ticketing Platform</span>
+
+  <!-- Spacer -->
+  <span class="flex-spacer"></span>
+
+  <!-- Navigation links (visible on wide screens) -->
+  <nav class="nav-links" *ngIf="isLoggedIn$ | async">
+    <a mat-button routerLink="/events" routerLinkActive="active-link">
+      Events
+    </a>
+    <a mat-button routerLink="/tickets" routerLinkActive="active-link">
+      My Tickets
+    </a>
+    <a
+      *ngIf="(user$ | async)?.role === 'ADMIN'"
+      mat-button
+      routerLink="/admin"
+      routerLinkActive="active-link"
+    >
+      Admin
+    </a>
+  </nav>
+
+  <!-- User menu -->
+  <button
+    *ngIf="isLoggedIn$ | async; else loginBtn"
+    mat-button
+    [matMenuTriggerFor]="userMenu"
+  >
+    <mat-icon>account_circle</mat-icon>
+    {{ (user$ | async)?.email }}
+  </button>
+  <ng-template #loginBtn>
+    <a mat-button routerLink="/auth/login">Login</a>
+  </ng-template>
+
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item routerLink="/profile">
+      <mat-icon>person</mat-icon>
+      Profile
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </mat-menu>
+</mat-toolbar>

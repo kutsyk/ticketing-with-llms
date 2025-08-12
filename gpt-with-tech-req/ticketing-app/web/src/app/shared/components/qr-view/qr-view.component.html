@@ -1,0 +1,17 @@
+<!-- web/src/app/shared/components/qr-view/qr-view.component.html -->
+<div class="qr-view-container" *ngIf="value; else noData">
+  <qrcode
+    [qrdata]="value"
+    [width]="size"
+    [errorCorrectionLevel]="'M'"
+    class="qr-code"
+  ></qrcode>
+  <p class="qr-label" *ngIf="label">{{ label }}</p>
+</div>
+
+<ng-template #noData>
+  <div class="qr-no-data">
+    <mat-icon>qr_code_2</mat-icon>
+    <span>No QR data available</span>
+  </div>
+</ng-template>
