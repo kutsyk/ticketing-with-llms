@@ -57,12 +57,13 @@ async function main() {
   });
 
   console.log(`🎟 Ticket type created: ${ticketType.name}`);
-
+  ticketTypeId = ticketType.id;
+  console.log(ticketTypeId);
   // --- Create a sample ticket assigned to admin ---
   const ticket = await prisma.ticket.create({
     data: {
       user_id: admin.id,
-      ticket_type_id: ticketType.id,
+      ticket_type_id: ticketTypeId,
       serial: `T-${Date.now()}`,
       qr_token: `QR-${Date.now()}`,
       status: 'ISSUED',

@@ -146,7 +146,7 @@ model Ticket {
 
   // Relations
   user            User?         @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
-  ticket_type     TicketType    @relation(fields: [ticket_type_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  ticket_type     TicketType?    @relation(fields: [ticket_type_id], references: [id], onDelete: Restrict, onUpdate: Cascade)
   payment         Payment?      @relation(fields: [payment_id], references: [id], onDelete: SetNull, onUpdate: Cascade)
   scans           TicketScan[]
 
