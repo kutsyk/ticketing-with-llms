@@ -37,7 +37,7 @@
   <!-- User menu -->
   <button *ngIf="isLoggedIn$ | async; else loginBtn" mat-button >   <!-- [matMenuTriggerFor]="userMenu" -->
     <mat-icon>account_circle</mat-icon>
-    {{ user$.email }}
+    {{ (user$ | async)?.email }}
   </button>
   <ng-template #loginBtn>
     <a mat-button routerLink="/auth/login">Login</a>
