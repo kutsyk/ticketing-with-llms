@@ -1,0 +1,41 @@
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+.vscode/*
+
+# Logs
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Angular cache
+.angular/cache
+
+# Environment files
+/src/environments/environment*.ts
+
+# Coverage reports
+/coverage
+
+# Temporary files
+*.tmp
+*.temp

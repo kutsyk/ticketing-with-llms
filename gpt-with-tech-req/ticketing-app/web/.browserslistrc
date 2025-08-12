@@ -1,0 +1,15 @@
+# This file is used by the build system to adjust the CSS and JS output to support the specified browsers.
+
+# You can see the full list of browsers here: https://github.com/browserslist/browserslist
+
+# Production environment
+> 0.5%
+last 2 versions
+Firefox ESR
+not dead
+not IE 9-11 # Angular does not support IE 9-11 officially
+
+# Development environment
+last 1 chrome version
+last 1 firefox version
+last 1 safari version
