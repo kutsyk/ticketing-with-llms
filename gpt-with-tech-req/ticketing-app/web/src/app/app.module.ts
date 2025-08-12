@@ -52,9 +52,6 @@ import { CommonModule, NgIf } from '@angular/common';
     MatSidenavModule,
     CommonModule,
     RouterOutlet,
-    HeaderComponent, 
-    FooterComponent, 
-    LoadingOverlayComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },

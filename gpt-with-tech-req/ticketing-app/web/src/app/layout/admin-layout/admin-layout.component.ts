@@ -7,11 +7,22 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
 import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 import { SidebarComponent } from 'src/app/shared/components/sidebar/sidebar.component';
 import { LoadingOverlayComponent } from 'src/app/shared/components/loading-overlay/loading-overlay.component';
+import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss'],
+  standalone: true,
+  imports: [    HeaderComponent, 
+    FooterComponent, 
+    SidebarComponent,
+    LoadingOverlayComponent,
+    RouterOutlet,
+    MatSidenavContent,
+    MatSidenavContainer,
+    MatSidenav
+]
 })
 export class AdminLayoutComponent {
   pageTitle = '';

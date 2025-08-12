@@ -12,8 +12,18 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main-layout',
+  standalone: true,
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss'],
+  imports: [    HeaderComponent, 
+    FooterComponent, 
+    SidebarComponent,
+    LoadingOverlayComponent,
+    RouterOutlet,
+    MatSidenavContent,
+    MatSidenavContainer,
+    MatSidenav
+]
 })
 export class MainLayoutComponent implements OnInit, OnDestroy {
   pageTitle = 'Ticketing Platform';
