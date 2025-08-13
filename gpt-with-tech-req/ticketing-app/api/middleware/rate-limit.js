@@ -44,6 +44,15 @@ export default function withRateLimit(handler, options = {}) {
     // res.setHeader('X-RateLimit-Remaining', remaining);
     // res.setHeader('X-RateLimit-Reset', reset);
 
+    res.setHeader('Access-Control-Allow-Origin', '*');
+//    res.headers.set('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
+//   res.headers.set('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+//   res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   res.headers.set('Access-Control-Allow-Credentials', 'true');
     return handler(req, res);
   };
 }
+
+export const config = {
+  matcher: '/api/:path*',
+};
