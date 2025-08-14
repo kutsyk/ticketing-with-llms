@@ -13,8 +13,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  // standalone: true,
-  // imports: [MatIcon, MatMenu, MatToolbar, CommonModule]
 })
 export class HeaderComponent {
   @Output() toggleSidenav = new EventEmitter<void>();

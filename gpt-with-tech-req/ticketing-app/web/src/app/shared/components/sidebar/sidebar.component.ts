@@ -9,8 +9,6 @@ import { Router, RouterOutlet } from '@angular/router';
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  // standalone: true,
-  // imports: [MatIcon, MatSidenavContent, MatNavList, MatToolbar, MatSidenav, MatSidenavContainer, RouterOutlet]
 })
 export class SidebarComponent {
   constructor(private router: Router) {}

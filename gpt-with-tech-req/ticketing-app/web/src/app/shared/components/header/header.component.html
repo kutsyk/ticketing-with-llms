@@ -17,7 +17,7 @@
   <span class="flex-spacer"></span>
 
   <!-- Navigation links (visible on wide screens) -->
-  <nav class="nav-links" *ngIf="isLoggedIn$ | async">
+  <nav class="nav-links" *ngIf="(isLoggedIn$ | async)?.valueOf()">
     <a mat-button routerLink="/events" routerLinkActive="active-link">
       Events
     </a>
@@ -35,7 +35,7 @@
   </nav>
 
   <!-- User menu -->
-  <button *ngIf="isLoggedIn$ | async; else loginBtn" mat-button >   <!-- [matMenuTriggerFor]="userMenu" -->
+  <button *ngIf="(isLoggedIn$ | async)?.valueOf(); else loginBtn" class="mat-button" [matMenuTriggerFor]="userMenu" >
     <mat-icon>account_circle</mat-icon>
     {{ (user$ | async)?.email }}
   </button>

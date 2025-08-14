@@ -8,8 +8,6 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
   selector: 'app-loading-overlay',
   templateUrl: './loading-overlay.component.html',
   styleUrls: ['./loading-overlay.component.scss'],
-  // standalone: true,
-  // imports: [MatProgressSpinner]
 })
 export class LoadingOverlayComponent {
   // Emits true when there are active HTTP requests
