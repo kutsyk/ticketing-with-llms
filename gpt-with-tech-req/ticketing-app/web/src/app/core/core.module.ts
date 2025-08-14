@@ -1,7 +1,7 @@
 // web/src/app/core/core.module.ts
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 // Guards
 import { AuthGuard } from './guards/auth.guard';
@@ -17,24 +17,20 @@ import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { StorageService } from './services/storage.service';
 
-@NgModule({
-  imports: [CommonModule, HttpClientModule],
-  providers: [
-    // Guards
-    AuthGuard,
-    RoleGuard,
-
-    // Services
-    AuthService,
-    ApiService,
-    StorageService,
-
-    // HTTP interceptors (order matters)
-    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-  ],
-})
+@NgModule({ imports: [CommonModule], providers: [
+        // Guards
+        AuthGuard,
+        RoleGuard,
+        // Services
+        AuthService,
+        ApiService,
+        StorageService,
+        // HTTP interceptors (order matters)
+        { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
