@@ -13,13 +13,6 @@ export interface ApiEvent {
   updated_at?: string;
 }
 
-export interface Paginated<T> {
-  total: number;
-  limit: number;
-  offset: number;
-  items: T[];
-}
-
 // Your UI model (what the app uses)
 export interface Event {
   id: string;

@@ -1,0 +1,153 @@
+<!-- web/src/app/features/admin/pages/dashboard/admin-dashboard.component.html -->
+<div class="admin-dashboard">
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid">
+    <mat-card class="kpi-card">
+      <mat-card-title>Users</mat-card-title>
+      <mat-card-content>
+        <div class="kpi-value">{{ (kpis$ | async)?.users ?? '—' }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <mat-card-title>Events</mat-card-title>
+      <mat-card-content>
+        <div class="kpi-value">{{ (kpis$ | async)?.events ?? '—' }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <mat-card-title>Tickets Sold</mat-card-title>
+      <mat-card-content>
+        <div class="kpi-value">{{ (kpis$ | async)?.ticketsSold ?? '—' }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <mat-card-title>Revenue</mat-card-title>
+      <mat-card-content>
+        <div class="kpi-value">
+          {{ ((kpis$ | async)?.revenueCents || 0) / 100 | currency }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- ROW: RECENT PAYMENTS + RECENT SCANS -->
+  <div class="row">
+    <mat-card class="table-card">
+      <mat-card-header>
+        <mat-card-title>Recent Payments</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+<!--        <table mat-table [dataSource]="recentPayments$ | async" class="full-width-table">-->
+
+<!--          <ng-container matColumnDef="created_at">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Date</th>-->
+<!--            <td mat-cell *matCellDef="let p">{{ p.created_at | date:'short' }}</td>-->
+<!--          </ng-container>-->
+
+<!--          <ng-container matColumnDef="user_email">-->
+<!--            <th mat-header-cell *matHeaderCellDef>User</th>-->
+<!--            <td mat-cell *matCellDef="let p">{{ p.user?.email || '—' }}</td>-->
+<!--          </ng-container>-->
+
+<!--          <ng-container matColumnDef="amount">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Amount</th>-->
+<!--            <td mat-cell *matCellDef="let p">{{ p.amount / 100 | currency:p.currency }}</td>-->
+<!--          </ng-container>-->
+
+<!--          <ng-container matColumnDef="status">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Status</th>-->
+<!--            <td mat-cell *matCellDef="let p">-->
+<!--              <span class="status" [class.ok]="p.status==='SUCCEEDED'" [class.warn]="p.status==='PENDING'" [class.bad]="p.status!=='SUCCEEDED' && p.status!=='PENDING'">-->
+<!--                {{ p.status }}-->
+<!--              </span>-->
+<!--            </td>-->
+<!--          </ng-container>-->
+
+<!--          <tr mat-header-row *matHeaderRowDef="paymentColumns"></tr>-->
+<!--          <tr mat-row *matRowDef="let row; columns: paymentColumns"></tr>-->
+<!--        </table>-->
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button color="primary" routerLink="/admin/payments">View all</a>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="table-card">
+      <mat-card-header>
+        <mat-card-title>Recent Scans</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+<!--        <table mat-table [dataSource]="recentScans$ | async" class="full-width-table">-->
+
+<!--          <ng-container matColumnDef="scanned_at">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Time</th>-->
+<!--            <td mat-cell *matCellDef="let s">{{ s.scanned_at | date:'short' }}</td>-->
+<!--          </ng-container>-->
+
+<!--          <ng-container matColumnDef="ticket_serial">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Ticket</th>-->
+<!--            <td mat-cell *matCellDef="let s">{{ s.ticket?.serial || s.ticket_id }}</td>-->
+<!--          </ng-container>-->
+
+<!--          <ng-container matColumnDef="result">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Result</th>-->
+<!--            <td mat-cell *matCellDef="let s">-->
+<!--              <span class="status" [class.ok]="s.result==='VALIDATED'" [class.warn]="s.result==='ALREADY_USED'" [class.bad]="s.result!=='VALIDATED' && s.result!=='ALREADY_USED'">-->
+<!--                {{ s.result }}-->
+<!--              </span>-->
+<!--            </td>-->
+<!--          </ng-container>-->
+
+<!--          <tr mat-header-row *matHeaderRowDef="scanColumns"></tr>-->
+<!--          <tr mat-row *matRowDef="let row; columns: scanColumns"></tr>-->
+<!--        </table>-->
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button color="primary" routerLink="/admin/scans">View all</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- AUDIT LOGS -->
+  <div class="row">
+    <mat-card class="table-card">
+      <mat-card-header>
+        <mat-card-title>Recent Audit Logs</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+<!--        <table mat-table [dataSource]="recentAuditLogs$ | async" class="full-width-table">-->
+
+<!--          <ng-container matColumnDef="created_at">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Time</th>-->
+<!--            <td mat-cell *matCellDef="let a">{{ a.created_at | date:'short' }}</td>-->
+<!--          </ng-container>-->
+
+<!--          <ng-container matColumnDef="action">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Action</th>-->
+<!--            <td mat-cell *matCellDef="let a">{{ a.action }}</td>-->
+<!--          </ng-container>-->
+
+<!--          <ng-container matColumnDef="entity">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Entity</th>-->
+<!--            <td mat-cell *matCellDef="let a">{{ a.entity }} ({{ a.entity_id | slice:0:6 }}…)</td>-->
+<!--          </ng-container>-->
+
+<!--          <ng-container matColumnDef="actor">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Actor</th>-->
+<!--            <td mat-cell *matCellDef="let a">{{ a.user_email || 'System' }}</td>-->
+<!--          </ng-container>-->
+
+<!--          <tr mat-header-row *matHeaderRowDef="auditColumns"></tr>-->
+<!--          <tr mat-row *matRowDef="let row; columns: auditColumns"></tr>-->
+<!--        </table>-->
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button color="primary" routerLink="/admin/audit-logs">View all</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

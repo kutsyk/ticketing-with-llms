@@ -31,6 +31,7 @@ import { LoadingOverlayComponent } from './shared/components/loading-overlay/loa
 import { CommonModule, DatePipe, NgIf } from '@angular/common';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
     CommonModule,
     RouterOutlet,
     DatePipe,
+    MatFormFieldModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },

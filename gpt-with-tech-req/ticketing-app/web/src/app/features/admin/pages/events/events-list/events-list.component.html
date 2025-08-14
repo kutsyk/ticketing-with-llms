@@ -1,0 +1,73 @@
+<!-- Admin > Events > List -->
+<div class="events-list">
+  <div class="toolbar">
+    <mat-form-field appearance="outline" class="filter">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Name, venue…" [(ngModel)]="filter" (ngModelChange)="applyFilter()" />
+      <button mat-icon-button matSuffix *ngIf="filter" (click)="clearFilter()" aria-label="Clear">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" (click)="create()">
+      <mat-icon>add</mat-icon>
+      New Event
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2 full-width">
+    <!-- Name -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let e">{{ e.name || e.title }}</td>
+    </ng-container>
+
+    <!-- Venue -->
+    <ng-container matColumnDef="venue">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Venue</th>
+      <td mat-cell *matCellDef="let e">{{ e.venue || e.location || '—' }}</td>
+    </ng-container>
+
+    <!-- Starts -->
+    <ng-container matColumnDef="starts">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Starts</th>
+      <td mat-cell *matCellDef="let e">{{ (e.starts_at || e.start_date) | date:'medium' }}</td>
+    </ng-container>
+
+    <!-- Ends -->
+    <ng-container matColumnDef="ends">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ends</th>
+      <td mat-cell *matCellDef="let e">{{ (e.ends_at || e.end_date) | date:'medium' }}</td>
+    </ng-container>
+
+    <!-- Status -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let e">
+        <span class="chip" [class.published]="(e.status||'').toUpperCase()==='PUBLISHED'"
+              [class.draft]="(e.status||'').toUpperCase()==='DRAFT'"
+              [class.archived]="(e.status||'').toUpperCase()==='ARCHIVED'">
+          {{ e.status || 'DRAFT' }}
+        </span>
+      </td>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let e">
+        <button mat-icon-button color="primary" (click)="edit(e.id)" aria-label="Edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="remove(e)" aria-label="Delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10,25,50]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+</div>

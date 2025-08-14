@@ -1,0 +1,59 @@
+/* web/src/app/features/admin/pages/dashboard/admin-dashboard.component.scss */
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.kpi-card .kpi-value {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.table-card {
+  overflow: hidden;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.status {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  &.ok {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+  &.warn {
+    background: #fff8e1;
+    color: #f57f17;
+  }
+  &.bad {
+    background: #ffebee;
+    color: #c62828;
+  }
+}
+
+@media (max-width: 1024px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+}

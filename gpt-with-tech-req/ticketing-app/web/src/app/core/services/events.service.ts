@@ -2,7 +2,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ApiService } from './api.service';
-import { ApiEvent, Event, mapApiEvent, Paginated } from '../models/event.model';
+import { ApiEvent, Event, mapApiEvent } from '../models/event.model';
+import { Paginated } from '../models/util.model';
 
 @Injectable({
   providedIn: 'root',
