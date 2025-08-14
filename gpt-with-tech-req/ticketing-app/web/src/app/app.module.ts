@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -32,35 +32,41 @@ import { CommonModule, DatePipe, NgIf } from '@angular/common';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 
-@NgModule({ declarations: [
-        AppComponent,
-        HeaderComponent,
-        FooterComponent,
-        SidebarComponent,
-        LoadingOverlayComponent,
-        MainLayoutComponent,
-        AdminLayoutComponent,
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        BrowserAnimationsModule,
-        RouterModule,
-        AppRoutingModule,
-        MaterialModule,
-        MatIcon,
-        MatSidenavContent,
-        MatIconModule,
-        MatDialogModule,
-        MatSlideToggleModule,
-        MatProgressSpinnerModule,
-        MatPaginatorModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        CommonModule,
-        RouterOutlet,
-        DatePipe], providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent,
+    LoadingOverlayComponent,
+    MainLayoutComponent,
+    AdminLayoutComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule,
+    MaterialModule,
+    MatIcon,
+    MatSidenavContent,
+    MatIconModule,
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    CommonModule,
+    RouterOutlet,
+    DatePipe,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
+})
 export class AppModule {}
