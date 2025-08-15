@@ -74,7 +74,6 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
-
   // Apply rate limiting
   // const limited = await rateLimit(req, res);
   // if (limited) return;
@@ -85,7 +84,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid input', details: parseResult.error.errors });
   }
   const { email, password } = parseResult.data;
-
+  console.log(email);
+  console.log(password);
   // Find user
   const user = await prisma.user.findUnique({
     where: { email: email.toLowerCase() },
